@@ -10,16 +10,32 @@
     src: url(fonts/GoogleSans-Medium-v1.27.ttf);
 }
 
+@font-face {
+    font-family: 'GoogleRegular';
+    src: url(fonts/GoogleSansDisplay-Regular-v1.27.ttf);
+}
+
 body {
     overflow: hidden;
     font-family: 'GoogleMedium', sans-serif;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: black;
     background-size: cover;
     color: #3b2f2f;
+}
+
+.header{
+    text-align: center;
+    padding: 20px 0;
+}
+
+.header img {
+    width: 400px;
+    height: auto;
 }
 
 .container {
@@ -106,30 +122,39 @@ button:hover {
 #result d-button {
     display: inline-block;
     margin-top: 20px;
-    padding: 10px 20px;
+    padding: 0.8em 2em;
     background-color: #d4a017;
     color: white;
     border-radius: 5px;
     text-decoration: none;
-    font-family: 'GoogleMedium', sans-serif;
-    border: none; /* Remove default button border */
+    font-family: 'GoogleRegular', sans-serif;
+    font-weight: lighter;
+    border: 1px solid #000; /* Remove default button border */
     cursor: pointer;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+#result d-button:active{
+    transform: translate(0);
+    box-shadow: none;
 }
 
 #result d-button:hover {
-    background-color: #000;
-    color: #ccc;
-}
-
-#result d-button i {
-    margin-left: 10px;
+    font-weight: lighter;
+    border: 1px solid #d4a017;
+    transform: translate(-0.25rem, -0.25rem);
+    background: #000;
+    color: #fff;
+    box-shadow: 0.25rem 0.25rem #d4a017;
 }
 
 #result d-button .download-text {
     font-size: 16px;
-    font-weight: bold;
-    color: white;
+    font-weight: normal;
+    color: rgb(255, 255, 255);
 }
+
 
 @media (min-width: 768px) {
     .submit-button {

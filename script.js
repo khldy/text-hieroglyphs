@@ -48,7 +48,7 @@ function createImage(text) {
         context.drawImage(img, 0, 0, canvas.width, canvas.height);
 
         // Set text properties
-        context.font = '180px GoogleMedium';
+        context.font = '120px GoogleMedium';
         context.fillStyle = '#ac1d40';
         context.textAlign = 'center';
         context.textBaseline = 'middle';
