@@ -155,6 +155,16 @@ button:hover {
     color: rgb(255, 255, 255);
 }
 
+footer {
+    font-family: "GoogleRegular";
+    text-align: center;
+    padding: 20px 0;
+    color: white;
+    position: fixed; /* Fixed position at the bottom */
+    width: 100%;
+    bottom: 0;
+}
+
 
 /* Add this CSS at the end of your existing styles */
 
@@ -180,8 +190,14 @@ button:hover {
         font-size: 16px; /* Reduce font size for buttons on smaller screens */
     }
 
+    footer{
+        font-size: 13px;
+    }
+
     #result {
         font-size: 20px; /* Adjust font size for the result on smaller screens */
     }
 }
+
+
 
