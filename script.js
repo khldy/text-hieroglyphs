@@ -48,14 +48,28 @@ function createImage(text) {
         context.globalCompositeOperation = 'source-over'; // Ensure drawing over the background
         context.drawImage(img, 0, 0, canvas.width, canvas.height);
 
+        // Split the text by spaces to create multiple lines
+        const lines = text.split('\n');
+        const lineHeight = 130;
+
+        // Calculate the font size based on the length of the input text
+        const MAX_FONT_SIZE = 120;
+        const MIN_FONT_SIZE = 40;
+        const fontSize = Math.min(MAX_FONT_SIZE, Math.max(MIN_FONT_SIZE, MAX_FONT_SIZE - text.length));
+
         // Set text properties
-        context.font = '120px GoogleMedium';
+        context.font = fontSize + 'px GoogleMedium';
         context.fillStyle = 'white';
         context.textAlign = 'center';
         context.textBaseline = 'middle';
         
-        const verticalOffset = 55; // Adjust this value as needed
-    context.fillText(text, canvas.width / 2, canvas.height / 2 + verticalOffset);
+        const initialY = canvas.height / 2 - (lines.length - 1) * lineHeight / 2;
+        lines.forEach((line, index) => {
+            context.fillText(line, canvas.width / 2, initialY + index * lineHeight);
+        });
+
+        // const verticalOffset = 55; // Adjust this value as needed
+    // context.fillText(text, canvas.width / 2, canvas.height / 2 + verticalOffset);
         // Draw text
         // context.fillText(text, canvas.width / 2, canvas.height / 2);
 
