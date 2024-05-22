@@ -2,7 +2,12 @@ document.getElementById('nameForm').addEventListener('submit', function(event) {
     event.preventDefault();
     const nameInput = document.getElementById('nameInput').value;
     const resultDiv = document.getElementById('result');
-    resultDiv.textContent = convertToHieroglyphs(nameInput);
+    resultDiv.innerHTML = ''; // Clear previous results
+    const hieroglyphs = convertToHieroglyphs(nameInput);
+    const hieroglyphsText = document.createElement('div');
+    hieroglyphsText.textContent = hieroglyphs;
+    resultDiv.appendChild(hieroglyphsText);
+    createImage(hieroglyphs);
 });
 
 function convertToHieroglyphs(name) {
@@ -23,4 +28,48 @@ function convertToHieroglyphs(name) {
         }
     }
     return hieroglyphs;
+}
+
+function createImage(text) {
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    canvas.width = 1080;
+    canvas.height = 1080;
+
+    // Clear the canvas before drawing
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Set background
+    const img = new Image();
+    img.src = 'pics/text-back.jpg'; // Add a relevant image for the background
+    img.onload = () => {
+        console.log('Image loaded successfully');
+        context.globalCompositeOperation = 'source-over'; // Ensure drawing over the background
+        context.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        // Set text properties
+        context.font = '180px GoogleMedium';
+        context.fillStyle = '#ac1d40';
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+
+        // Draw text
+        context.fillText(text, canvas.width / 2, canvas.height / 2);
+
+        // Add download button
+        const downloadButton = document.createElement('d-button');
+        downloadButton.textContent = 'Download Image';
+        downloadButton.style.display = 'block';
+        downloadButton.style.marginTop = '20px';
+
+        downloadButton.addEventListener('click', function() {
+            const dataURL = canvas.toDataURL('image/png');
+            const downloadLink = document.createElement('a');
+            downloadLink.href = dataURL;
+            downloadLink.download = 'hieroglyphs.png';
+            downloadLink.click();
+        });
+
+        document.getElementById('result').appendChild(downloadButton);
+    };
 }

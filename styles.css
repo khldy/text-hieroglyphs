@@ -1,22 +1,44 @@
+@font-face {
+    font-family: 'Canobis';
+    src: url(fonts/Canobis-Regular.otf);
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GoogleMedium';
+    src: url(fonts/GoogleSans-Medium-v1.27.ttf);
+}
+
 body {
-    font-family: Arial, sans-serif;
+    overflow: hidden;
+    font-family: 'GoogleMedium', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f0f0;
+    background-color: black;
+    background-size: cover;
+    color: #3b2f2f;
 }
 
 .container {
+    overflow: hidden;
     text-align: center;
     background: white;
-    padding: 20px;
+    padding: 50px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.img{
+    size: 20px;
 }
 
 h1 {
     margin-bottom: 20px;
+    font-family: "Dela Gothic One", sans-serif;
+    color: #d4a017;
 }
 
 form {
@@ -29,29 +51,88 @@ label {
 }
 
 input {
+    background-color: white;
+    color: #d4a017;
+    text-align: center;
     padding: 10px;
     width: 100%;
     box-sizing: border-box;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #000;
     border-radius: 5px;
+    font-family: 'GoogleMedium', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+label{
+    
 }
 
 button {
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    font-family: "GoogleMedium";
+    width: 100%;
+    --bg: #000;
+    --hover-bg: #d4a017;
+    --hover-text: #000;
+    color: #fff;
     cursor: pointer;
+    border: 1px solid var(--bg);
+    border-radius: 4px;
+    padding: 0.8em 2em;
+    background: var(--bg);
+    transition: 0.2s;
+}
+
+button:active {
+    transform: translate(0);
+    box-shadow: none;
 }
 
 button:hover {
-    background-color: #0056b3;
+    color: var(--hover-text);
+    transform: translate(-0.25rem, -0.25rem);
+    background: var(--hover-bg);
+    box-shadow: 0.25rem 0.25rem var(--bg);
 }
 
 #result {
     margin-top: 20px;
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
+    font-family: 'GoogleMedium', sans-serif;
+}
+
+#result d-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #d4a017;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: 'GoogleMedium', sans-serif;
+    border: none; /* Remove default button border */
+    cursor: pointer;
+}
+
+#result d-button:hover {
+    background-color: #000;
+    color: #ccc;
+}
+
+#result d-button i {
+    margin-left: 10px;
+}
+
+#result d-button .download-text {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+@media (min-width: 768px) {
+    .submit-button {
+    padding: 0 40px;
+    }
 }
