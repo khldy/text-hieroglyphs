@@ -156,6 +156,8 @@ button:hover {
 }
 
 footer {
+    margin-top: 20px;
+    padding-top: 20px;
     font-family: "GoogleRegular";
     text-align: center;
     padding: 20px 0;
