@@ -49,12 +49,14 @@ function createImage(text) {
 
         // Set text properties
         context.font = '120px GoogleMedium';
-        context.fillStyle = '#ac1d40';
+        context.fillStyle = 'white';
         context.textAlign = 'center';
         context.textBaseline = 'middle';
-
+        
+        const verticalOffset = 55; // Adjust this value as needed
+    context.fillText(text, canvas.width / 2, canvas.height / 2 + verticalOffset);
         // Draw text
-        context.fillText(text, canvas.width / 2, canvas.height / 2);
+        // context.fillText(text, canvas.width / 2, canvas.height / 2);
 
         // Add download button
         const downloadButton = document.createElement('d-button');
