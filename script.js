@@ -8,6 +8,9 @@ document.getElementById('nameForm').addEventListener('submit', function(event) {
     hieroglyphsText.textContent = hieroglyphs;
     resultDiv.appendChild(hieroglyphsText);
     createImage(hieroglyphs);
+
+    // Save to localStorage
+    saveToLocalStorage(nameInput);
 });
 
 function convertToHieroglyphs(name) {
@@ -98,7 +101,6 @@ function createImage(text) {
             context.fillText(line, canvas.width / 2, initialY + index * lineHeight);
         });
 
-
         // Add download button
         const downloadButton = document.createElement('button');
         downloadButton.textContent = 'Download Image';
@@ -115,4 +117,15 @@ function createImage(text) {
 
         document.getElementById('result').appendChild(downloadButton);
     };
+}
+
+function saveToLocalStorage(text) {
+    let storedTexts = JSON.parse(localStorage.getItem('storedTexts')) || [];
+    storedTexts.push(text);
+    localStorage.setItem('storedTexts', JSON.stringify(storedTexts));
+}
+
+// The following function is for developer use only, not for displaying to users
+function getStoredTexts() {
+    return JSON.parse(localStorage.getItem('storedTexts')) || [];
 }
