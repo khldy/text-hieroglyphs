@@ -48,33 +48,59 @@ function createImage(text) {
         context.globalCompositeOperation = 'source-over'; // Ensure drawing over the background
         context.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-        // Split the text by spaces to create multiple lines
-        const lines = text.split('\n');
-        const lineHeight = 130;
+        // Function to wrap text into lines
+        function wrapText(context, text, maxWidth, fontSize) {
+            const words = text.split(' ');
+            let line = '';
+            const lines = [];
 
-        // Calculate the font size based on the length of the input text
+            for (let n = 0; n < words.length; n++) {
+                const testLine = line + words[n] + ' ';
+                context.font = fontSize + 'px GoogleMedium';
+                const metrics = context.measureText(testLine);
+                const testWidth = metrics.width;
+                if (testWidth > maxWidth && n > 0) {
+                    lines.push(line.trim());
+                    line = words[n] + ' ';
+                } else {
+                    line = testLine;
+                }
+            }
+            lines.push(line.trim());
+            return lines;
+        }
+
+        // Calculate the font size and adjust it based on text length and canvas width
         const MAX_FONT_SIZE = 120;
         const MIN_FONT_SIZE = 40;
-        const fontSize = Math.min(MAX_FONT_SIZE, Math.max(MIN_FONT_SIZE, MAX_FONT_SIZE - text.length));
+        let fontSize = MAX_FONT_SIZE;
+        let lines = wrapText(context, text, canvas.width - 100, fontSize);
+        let textHeight = lines.length * (fontSize + 10);
+
+        // Adjust font size if text exceeds canvas width or height
+        while (fontSize > MIN_FONT_SIZE && (textHeight > canvas.height - 100 || lines.some(line => context.measureText(line).width > canvas.width - 100))) {
+            fontSize -= 5;
+            lines = wrapText(context, text, canvas.width - 100, fontSize);
+            textHeight = lines.length * (fontSize + 10);
+        }
 
         // Set text properties
         context.font = fontSize + 'px GoogleMedium';
         context.fillStyle = 'white';
         context.textAlign = 'center';
         context.textBaseline = 'middle';
-        
-        const initialY = canvas.height / 2 - (lines.length - 1) * lineHeight / 2;
+
+        // Draw wrapped text
+        const lineHeight = fontSize + 10;
+        const verticalOffset = 55; // Adjust this value to move the text down
+        const initialY = canvas.height / 2 - (lines.length - 1) * lineHeight / 2 + verticalOffset;
         lines.forEach((line, index) => {
             context.fillText(line, canvas.width / 2, initialY + index * lineHeight);
         });
 
-        // const verticalOffset = 55; // Adjust this value as needed
-    // context.fillText(text, canvas.width / 2, canvas.height / 2 + verticalOffset);
-        // Draw text
-        // context.fillText(text, canvas.width / 2, canvas.height / 2);
 
         // Add download button
-        const downloadButton = document.createElement('d-button');
+        const downloadButton = document.createElement('button');
         downloadButton.textContent = 'Download Image';
         downloadButton.style.display = 'block';
         downloadButton.style.marginTop = '20px';
