@@ -37,8 +37,8 @@ function convertToHieroglyphs(name) {
 function createImage(text) {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
-    canvas.width = 1080;
-    canvas.height = 1080;
+    canvas.width = 1191;
+    canvas.height = 907;
 
     // Clear the canvas before drawing
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -89,13 +89,13 @@ function createImage(text) {
 
         // Set text properties
         context.font = fontSize + 'px GoogleMedium';
-        context.fillStyle = 'white';
+        context.fillStyle = 'black';
         context.textAlign = 'center';
         context.textBaseline = 'middle';
 
         // Draw wrapped text
         const lineHeight = fontSize + 10;
-        const verticalOffset = 55; // Adjust this value to move the text down
+        const verticalOffset = 80; // Adjust this value to move the text down
         const initialY = canvas.height / 2 - (lines.length - 1) * lineHeight / 2 + verticalOffset;
         lines.forEach((line, index) => {
             context.fillText(line, canvas.width / 2, initialY + index * lineHeight);
